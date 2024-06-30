@@ -25,3 +25,6 @@ go.work
 /build/
 /dist/
 /vendor/
+
+# Ignore build files
+./tf-module/
