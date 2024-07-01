@@ -1,37 +1,54 @@
-package main
+package cmd
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"tf-module-deployer/utils"
+
+	"github.com/spf13/cobra"
 )
 
+var deployCmd = &cobra.Command{
+	Use:   "deploy",
+	Short: "Deploy the Terraform module",
+	Run: func(cmd *cobra.Command, args []string) {
+		deployCommand()
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(deployCmd)
+}
+
 func deployCommand() {
+	fmt.Println("Executing deploy command...")
+
 	// Get current working directory
 	cwd, err := os.Getwd()
 	if err != nil {
-		handleError("Error getting current directory", err)
+		utils.HandleError("Error getting current directory", err)
 	}
 
 	tfModuleDir := filepath.Join(cwd, ".tf-module")
 
 	// Create .tf-module directory if it doesn't exist
-	if err := createOrOverwriteDirectory(tfModuleDir); err != nil {
+	if err := utils.CreateOrOverwriteDirectory(tfModuleDir); err != nil {
 		fmt.Printf("Error creating or overwriting .tf-module directory: %v\n", err)
 		os.Exit(1)
 	}
 
 	// Changing directory to .tf-module directory
 	if err := os.Chdir(tfModuleDir); err != nil {
-		handleError("Error changing directory to .tf-module", err)
+		utils.HandleError("Error changing directory to .tf-module", err)
 	}
 	fmt.Println("Changed directory to .tf-module")
 
 	// Copying main.tf file to .tf-module directory
 	srcFile := filepath.Join(cwd, "main.tf")
 	dstFile := filepath.Join(tfModuleDir, "main.tf")
-	if err := copyFile(srcFile, dstFile); err != nil {
-		handleError("Error moving main.tf file", err)
+	if err := utils.CopyFile(srcFile, dstFile); err != nil {
+		utils.HandleError("Error moving main.tf file", err)
 	}
 	fmt.Println("Moved main.tf to .tf-module directory")
 }

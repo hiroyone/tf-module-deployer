@@ -29,7 +29,7 @@ cd tf-module-deployer
 To build the `tf-module-deployer` CLI tool, run the following command from the root directory of the repository:
 
 ```bash
-go build -o bin/tf-module-deployer ./cmd/tf-module-deployer
+go build -o bin/tf-module-deployer main.go
 ```
 
 This command compiles the Go package located at `cmd/tf-module-deployer`, which includes `main.go`, `deploy.go`, and any other necessary files.
