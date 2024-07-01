@@ -32,15 +32,16 @@ func deployCommand() {
 
 	tfModuleDir := filepath.Join(cwd, ".tf-module")
 
-	// Create .tf-module directory if it doesn't exist
+	// Create a deployment directory if it doesn't exist
 	if err := utils.CreateOrOverwriteDirectory(tfModuleDir); err != nil {
-		fmt.Printf("Error creating or overwriting .tf-module directory: %v\n", err)
+		fmt.Printf("Error creating or overwriting %s directory: %v\n", tfModuleDir, err)
 		os.Exit(1)
 	}
 
-	// Changing directory to .tf-module directory
+	// Changing directory to the created directory
 	if err := os.Chdir(tfModuleDir); err != nil {
-		utils.HandleError("Error changing directory to .tf-module", err)
+		utils.HandleError(
+			fmt.Sprintf("Error changing directory to %s", tfModuleDir), err)
 	}
 	fmt.Println("Changed directory to .tf-module")
 
@@ -50,10 +51,6 @@ func deployCommand() {
 	if err := utils.CopyFile(srcFile, dstFile); err != nil {
 		utils.HandleError("Error moving main.tf file", err)
 	}
-	fmt.Println("Moved main.tf to .tf-module directory")
+	fmt.Printf("Moved main.tf to %s directory", tfModuleDir)
 }
 
-func handleError(message string, err error) {
-	fmt.Printf("%s: %v\n", message, err)
-	os.Exit(1)
-}
