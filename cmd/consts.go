@@ -1,3 +1,6 @@
 package cmd
-const FileName = "main.tf"
-const ModuleDir = ".tf-module"
+
+const (
+	FileName = "main.tf"
+	ModuleDir = ".tf-module"
+)
