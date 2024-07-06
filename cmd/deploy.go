@@ -56,5 +56,11 @@ func deployCommand() {
 	} else {	
 		fmt.Printf("Moved %s to %s directory", fileName, tfModuleDir)
 	}
+
+       // Run terraform plan
+	   err = utils.RunTerraformPlan(tfModuleDir)
+	   utils.HandleError(
+		fmt.Sprintf("Failed to run terraform plan in %s", tfModuleDir), err)
+
 }
 
