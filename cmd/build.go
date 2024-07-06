@@ -9,19 +9,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var deployCmd = &cobra.Command{
+var buildCmd = &cobra.Command{
 	Use:   "deploy",
 	Short: "Deploy the Terraform module",
 	Run: func(cmd *cobra.Command, args []string) {
-		deployCommand()
+		buildCommand()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(deployCmd)
+	rootCmd.AddCommand(buildCmd)
 }
 
-func deployCommand() {
+func buildCommand() {
 	fmt.Println("Executing deploy command...")
 
 	// Get current working directory
@@ -56,11 +56,4 @@ func deployCommand() {
 	} else {	
 		fmt.Printf("Moved %s to %s directory", fileName, tfModuleDir)
 	}
-
-       // Run terraform plan
-	   err = utils.RunTerraformPlan(tfModuleDir)
-	   utils.HandleError(
-		fmt.Sprintf("Failed to run terraform plan in %s", tfModuleDir), err)
-
 }
-
