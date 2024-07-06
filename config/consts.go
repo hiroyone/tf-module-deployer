@@ -1,4 +1,4 @@
-package cmd
+package config
 
 const (
 	FileName = "main.tf"

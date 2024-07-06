@@ -27,4 +27,4 @@ go.work
 /vendor/
 
 # Ignore build files
-./tf-module/
+.tf-module/

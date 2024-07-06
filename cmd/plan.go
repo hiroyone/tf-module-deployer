@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"tf-module-deployer/config"
 	"tf-module-deployer/utils"
 
 	"github.com/spf13/cobra"
@@ -22,8 +23,8 @@ func init() {
 
 func planCommand() {
 	// Run terraform plan
-	err := utils.RunTerraformCommand("plan", ModuleDir)
+	err := utils.RunTerraformCommand("plan", config.ModuleDir)
 	utils.HandleError(
-		fmt.Sprintf("Failed to run terraform plan in %s", ModuleDir), err)
+		fmt.Sprintf("Failed to run terraform plan in %s", config.ModuleDir), err)
 }
 

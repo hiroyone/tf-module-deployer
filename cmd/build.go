@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"tf-module-deployer/config"
 	"tf-module-deployer/utils"
 
 	"github.com/spf13/cobra"
@@ -12,7 +13,7 @@ import (
 var buildCmd = &cobra.Command{
     Use:   "build",
     Short: "Build the Terraform module",
-    Long:  fmt.Sprintf(`This command moves the %s file to the %s directory.`, FileName, ModuleDir),
+    Long:  fmt.Sprintf(`This command moves the %s file to the %s directory.`, config.FileName, config.ModuleDir),
 	Run: func(cmd *cobra.Command, args []string) {
 		buildCommand()
 	},
@@ -30,7 +31,7 @@ func buildCommand() {
 	if err != nil {
 		utils.HandleError("Error getting current directory", err)
 	}
-	tfModuleDir := filepath.Join(cwd, ModuleDir)
+	tfModuleDir := filepath.Join(cwd, config.ModuleDir)
 
 	// Create a deployment directory if it doesn't exist
 	if err := utils.CreateOrOverwriteDirectory(tfModuleDir); err != nil {
@@ -46,12 +47,12 @@ func buildCommand() {
 	fmt.Printf("Changed directory to %s", tfModuleDir)
 
 	// Copying main.tf file to .tf-module directory
-	srcFile := filepath.Join(cwd, FileName)
-	dstFile := filepath.Join(tfModuleDir, FileName)
+	srcFile := filepath.Join(cwd, config.FileName)
+	dstFile := filepath.Join(tfModuleDir, config.FileName)
 	if err := utils.CopyFile(srcFile, dstFile); err != nil {
 		utils.HandleError(
-			fmt.Sprintf("Error moving %s file", FileName), err)
+			fmt.Sprintf("Error moving %s file", config.FileName), err)
 	} else {	
-		fmt.Printf("Moved %s to %s directory", FileName, tfModuleDir)
+		fmt.Printf("Moved %s to %s directory", config.FileName, tfModuleDir)
 	}
 }
