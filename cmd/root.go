@@ -9,17 +9,13 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "tf-module-deployer",
-	Short: "CLI tool for deploying Terraform modules",
-	Run: func(cmd *cobra.Command, args []string) {
-		// Default action if no subcommand is specified
-		cmd.Usage()
-	},
+	Short: "A CLI to deploy Terraform modules",
+	Long:  `tf-module-deployer is a CLI that helps in deploying Terraform modules to a server.`,
 }
 
 func Execute() {
-    if err := rootCmd.Execute(); err != nil {
-        fmt.Println(err)
-        // Exit the program if there's an error
-        os.Exit(1)
-    }
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }

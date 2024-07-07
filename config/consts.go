@@ -1,6 +1,6 @@
 package config
 
 const (
-	FileName = "main.tf"
+	FileName  = "main.tf"
 	ModuleDir = ".tf-module"
 )

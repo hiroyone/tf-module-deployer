@@ -11,9 +11,9 @@ import (
 )
 
 var buildCmd = &cobra.Command{
-    Use:   "build",
-    Short: "Build the Terraform module",
-    Long:  fmt.Sprintf(`This command moves the %s file to the %s directory.`, config.FileName, config.ModuleDir),
+	Use:   "build",
+	Short: "Build the Terraform module",
+	Long:  fmt.Sprintf(`This command moves the %s file to the %s directory.`, config.FileName, config.ModuleDir),
 	Run: func(cmd *cobra.Command, args []string) {
 		buildCommand()
 	},
@@ -52,7 +52,7 @@ func buildCommand() {
 	if err := utils.CopyFile(srcFile, dstFile); err != nil {
 		utils.HandleError(
 			fmt.Sprintf("Error moving %s file", config.FileName), err)
-	} else {	
+	} else {
 		fmt.Printf("Moved %s to %s directory", config.FileName, tfModuleDir)
 	}
 }

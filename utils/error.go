@@ -6,8 +6,8 @@ import (
 )
 
 func HandleError(message string, err error) {
-    if err != nil {
-        fmt.Printf("%s: %v\n", message, err)
-        os.Exit(1)
-    }
+	if err != nil {
+		fmt.Printf("%s: %v\n", message, err)
+		os.Exit(1)
+	}
 }

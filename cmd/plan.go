@@ -9,9 +9,9 @@ import (
 )
 
 var planCmd = &cobra.Command{
-    Use:   "plan",
-    Short: "Run terraform plan",
-    Long:  `This command runs terraform plan in the .tf-module-deployer/examples directory.`,
+	Use:   "plan",
+	Short: "Run terraform plan",
+	Long:  `This command runs terraform plan in the .tf-module-deployer/examples directory.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		planCommand()
 	},
@@ -27,4 +27,3 @@ func planCommand() {
 	utils.HandleError(
 		fmt.Sprintf("Failed to run terraform plan in %s", config.ModuleDir), err)
 }
-
