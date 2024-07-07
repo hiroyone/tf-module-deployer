@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"tf-module-deployer/config"
 	"tf-module-deployer/utils"
 
@@ -24,6 +23,5 @@ func init() {
 func planCommand() {
 	// Run terraform plan
 	err := utils.RunTerraformCommand("plan", config.ModuleDir)
-	utils.HandleError(
-		fmt.Sprintf("Failed to run terraform plan in %s", config.ModuleDir), err)
+	utils.HandleErrorfLn("Failed to run terraform plan in %s", err, config.ModuleDir)
 }

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"tf-module-deployer/config"
 	"tf-module-deployer/utils"
 
@@ -14,8 +13,8 @@ var applyCmd = &cobra.Command{
 	Long:  `This command runs terraform apply in the .tf-module-deployer/examples directory.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		err := utils.RunTerraformCommand("apply", config.ModuleDir)
-		utils.HandleError(
-			fmt.Sprintf("Failed to run terraform apply in %s", config.ModuleDir), err)
+		utils.HandleErrorfLn(
+			"Failed to run terraform apply in %s", err, config.ModuleDir)
 	},
 }
 
