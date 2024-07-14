@@ -4,6 +4,9 @@ BINARY_NAME=bin/tf-module-deployer
 # List of packages to test
 PKGS=$(shell go list ./... | grep -v /vendor/)
 
+# Directory for examples
+EXAMPLE_DIR=examples
+
 # Default target
 all: build
 
@@ -42,4 +45,8 @@ precommit: fmt vet lint test
 run:
 	./$(BINARY_NAME) --help
 
-.PHONY: all build fmt vet lint test clean install-tools precommit run
+# run the example directory
+run-example:
+	cd $(EXAMPLE_DIR) && ../$(BINARY_NAME) build && ../$(BINARY_NAME) plan
+
+.PHONY: all build fmt vet lint test clean install-tools precommit run build-example
